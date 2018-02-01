@@ -1,6 +1,8 @@
 enchant();
 window.onload = function() {
-    var game = new Game(320, 320);
+    var width = 320;
+    var height = 320;
+    var game = new Game(width, height);
 
     function selectRandomLetter(){
 	var letters = ["a", "b"];
@@ -8,19 +10,29 @@ window.onload = function() {
 	var max = letters.length;
 	var selectedLetter = letters[Math.floor(Math.random() * (max - min)) + min];
 
-	return selectedLetter
+	return selectedLetter;
     }
+
+    function getRandomCoords(){
+	//Return coordinates. Inclusive min and max
+	var min = 0;
+	var max = 320 - 50;
+	var coords = Math.floor(Math.random() * (max - min)) + min;
+
+	return coords;
+    }
+
     function createLetters(){
-	var selectedLetter = selectRandomLetter()
+	var selectedLetter = selectRandomLetter();
         var letter = new Sprite(50, 50);
 	var letterPath = "img/letters/" + selectedLetter + ".png";
         letter.image = game.assets[letterPath];
-        letter.x = 20;
-        letter.y = 30;
+        letter.x = getRandomCoords();
+        letter.y = -30;
         letter.frame = 50;
 	game.rootScene.addChild(letter);
 
-	return letter
+	return letter;
     }
 
     function moveLetters(letter){
@@ -36,6 +48,7 @@ window.onload = function() {
         });
     }
 
+    // Add all images
     game.preload("img/letters/a.png", "img/letters/b.png");
     game.onload = function() {
         var label = new enchant.Label();
@@ -49,8 +62,10 @@ window.onload = function() {
         label.font = "20px 'Arial'";
         game.rootScene.addChild(label);
 
-	var letter = createLetters();
-	moveLetters(letter);
-    }
+        //game.addEventListener("enterframe", function(){
+	    var letter = createLetters();
+	    moveLetters(letter);
+        //});
+    };
     game.start();
-}
+};
