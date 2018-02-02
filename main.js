@@ -48,6 +48,11 @@ window.onload = function() {
         });
     }
 
+    function presentStimulus(){
+	    var letter = createLetters();
+	    moveLetters(letter);
+    }
+
     // Add all images
     game.preload("img/letters/a.png", "img/letters/b.png");
     game.onload = function() {
@@ -62,10 +67,7 @@ window.onload = function() {
         label.font = "20px 'Arial'";
         game.rootScene.addChild(label);
 
-        //game.addEventListener("enterframe", function(){
-	    var letter = createLetters();
-	    moveLetters(letter);
-        //});
+	window.setInterval(presentStimulus, 2000);
     };
     game.start();
 };
