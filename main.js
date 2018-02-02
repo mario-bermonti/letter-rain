@@ -48,7 +48,7 @@ window.onload = function() {
         });
     }
 
-    function presentStimulus(){
+    function presentLetters(){
 	    var letter = createLetters();
 	    moveLetters(letter);
     }
@@ -67,8 +67,8 @@ window.onload = function() {
         label.font = "20px 'Arial'";
         game.rootScene.addChild(label);
 
-	presentStimulus();
-	window.setInterval(presentStimulus, 2000);
+	presentLetters();
+	window.setInterval(presentLetters, 2000);
     };
     game.start();
 };
