@@ -53,8 +53,17 @@ window.onload = function() {
 	    moveLetters(letter);
     }
 
+    function createAvatar(){
+        var avatar = new Sprite(50, 54);
+        avatar.image = game.assets["img/avatar.png"];
+        avatar.x = width/2;
+        avatar.y = height - 75;
+        avatar.frame = 50;
+	game.rootScene.addChild(avatar);
+    }
+
     // Add all images
-    game.preload("img/letters/a.png", "img/letters/b.png");
+    game.preload("img/letters/a.png", "img/letters/b.png", "img/avatar.png");
     game.onload = function() {
         var label = new enchant.Label();
 	//After calculating score, use it here
@@ -69,6 +78,7 @@ window.onload = function() {
 
 	presentLetters();
 	window.setInterval(presentLetters, 2000);
+	createAvatar();
     };
     game.start();
 };
