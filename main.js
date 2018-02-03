@@ -40,7 +40,7 @@ window.onload = function() {
             this.y += 2;
             this.frame = this.age % 2 + 16;
         });
-}
+    }
 
     function destroyLetter(letter){
         letter.addEventListener("touchstart", function(){
@@ -49,8 +49,8 @@ window.onload = function() {
     }
 
     function presentLetters(){
-	    var letter = createLetters();
-	    moveLetters(letter);
+	var letter = createLetters();
+	moveLetters(letter);
     }
 
     function createAvatar(){
@@ -60,6 +60,19 @@ window.onload = function() {
         avatar.y = height - 75;
         avatar.frame = 50;
 	game.rootScene.addChild(avatar);
+
+	return avatar;
+    }
+
+    function moveAvatar(avatar){
+	avatar.addEventListener("enterframe", function(){
+	    var speed = 6;
+	    if (game.input.right){
+		avatar.x += speed;
+	    } else if (game.input.left){
+		avatar.x -= speed;
+	    }
+	});
     }
 
     // Add all images
@@ -78,7 +91,8 @@ window.onload = function() {
 
 	presentLetters();
 	window.setInterval(presentLetters, 2000);
-	createAvatar();
+	var avatar = createAvatar();
+	moveAvatar(avatar);
     };
     game.start();
 };
