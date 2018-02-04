@@ -24,7 +24,7 @@ window.onload = function() {
 
     function createLetters(){
 	var selectedLetter = selectRandomLetter();
-        var letter = new Sprite(50, 50);
+        var letter = new Sprite(45, 50);
 	var letterPath = "img/letters/" + selectedLetter + ".png";
         letter.image = game.assets[letterPath];
         letter.x = getRandomCoords();
