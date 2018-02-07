@@ -75,6 +75,12 @@ window.onload = function() {
 	});
     }
 
+    function checkIfHit(letter, avatar){
+	if(avatar.intersect(letter)){
+	    console.log("HIT!");
+	}
+    }
+
     // Add all images
     game.preload("img/letters/a.png", "img/letters/b.png", "img/avatar.png");
     game.onload = function() {
@@ -89,9 +95,10 @@ window.onload = function() {
         label.font = "20px 'Arial'";
         game.rootScene.addChild(label);
 
+	presentLetters();
+	window.setInterval(presentLetters, 2000);
 	var avatar = createAvatar();
 	moveAvatar(avatar);
-	window.setInterval(presentLetters, 2000);
     };
     game.start();
 };
