@@ -5,6 +5,8 @@ window.onload = function() {
     var game = new Game(width, height);
     var presentedLetters = [];
     var letters = ["a", "b"];
+    var currentLetter;
+    var score = 0;
 
     function selectRandomLetter(){
 	var min = 0;
@@ -23,7 +25,17 @@ window.onload = function() {
 	return coords;
     }
 
+    function presentLetterName(){
+	// Determine the current letter to play its audio
+	currentLetter = selectRandomLetter();
+	console.log("correct letter: ", currentLetter);
+	// Doesn't work
+	//game.soundLetterA = game.assets["a.wav"];
+	//game.soundLetterA.play();
+    }
+
     function createLetters(){
+	// Displays words on screen
 	var selectedLetter = selectRandomLetter();
         var letter = new Sprite(50, 65);
 	letter.name = selectedLetter;
@@ -102,6 +114,7 @@ window.onload = function() {
 
 	var avatar = createAvatar();
 	moveAvatar(avatar);
+	presentLetterName();
 	window.setInterval(presentLetters, 2000);
 	//800ms so it doesn't detect twice the same hit for a given letter
 	window.setInterval(detectIfHit, 1000, avatar);
