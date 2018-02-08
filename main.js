@@ -3,9 +3,10 @@ window.onload = function() {
     var width = 320;
     var height = 320;
     var game = new Game(width, height);
+    var presentedLetters = [];
+    var letters = ["a", "b"];
 
     function selectRandomLetter(){
-	var letters = ["a", "b"];
 	var min = 0;
 	var max = letters.length;
 	var selectedLetter = letters[Math.floor(Math.random() * (max - min)) + min];
@@ -24,7 +25,8 @@ window.onload = function() {
 
     function createLetters(){
 	var selectedLetter = selectRandomLetter();
-        var letter = new Sprite(45, 50);
+        var letter = new Sprite(50, 65);
+	letter.name = selectedLetter;
 	var letterPath = "img/letters/" + selectedLetter + ".png";
         letter.image = game.assets[letterPath];
         letter.x = getRandomCoords();
@@ -49,7 +51,8 @@ window.onload = function() {
     }
 
     function presentLetters(){
-	var letter = createLetters();
+	letter = createLetters();
+	presentedLetters.push(letter);
 	moveLetters(letter);
     }
 
@@ -75,9 +78,11 @@ window.onload = function() {
 	});
     }
 
-    function checkIfHit(letter, avatar){
-	if(avatar.intersect(letter)){
-	    console.log("HIT!");
+    function detectIfHit(avatar){
+	for(var letter in presentedLetters){
+	    if(avatar.within(presentedLetters[letter], 35)){
+		console.log("HIT!");
+	    }
 	}
     }
 
@@ -95,10 +100,11 @@ window.onload = function() {
         label.font = "20px 'Arial'";
         game.rootScene.addChild(label);
 
-	presentLetters();
-	window.setInterval(presentLetters, 2000);
 	var avatar = createAvatar();
 	moveAvatar(avatar);
+	window.setInterval(presentLetters, 2000);
+	//800ms so it doesn't detect twice the same hit for a given letter
+	window.setInterval(detectIfHit, 1000, avatar);
     };
     game.start();
 };
