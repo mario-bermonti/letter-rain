@@ -90,16 +90,26 @@ window.onload = function() {
 	});
     }
 
+    function determineScore(letterName){
+	if(letterName == currentLetter){
+	    score += 1;
+	    presentLetterName();
+	} else{
+	    score -=1;
+	}
+    }
+
     function detectIfHit(avatar){
 	for(var letter in presentedLetters){
 	    if(avatar.within(presentedLetters[letter], 35)){
-		console.log("HIT!");
+		determineScore(presentedLetters[letter].name);
 	    }
 	}
     }
 
     // Add all images
-    game.preload("img/letters/a.png", "img/letters/b.png", "img/avatar.png");
+    // Add all audio
+    game.preload("img/letters/a.png", "img/letters/b.png", "img/avatar.png", "audio/a.wav");
     game.onload = function() {
         var label = new enchant.Label();
 	//After calculating score, use it here
