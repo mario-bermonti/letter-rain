@@ -28,7 +28,6 @@ window.onload = function() {
     function presentLetterName(){
 	// Determine the current letter to play its audio
 	currentLetter = selectRandomLetter();
-	console.log("correct letter: ", currentLetter);
 	// Doesn't work
 	//game.soundLetterA = game.assets["a.wav"];
 	//game.soundLetterA.play();
@@ -90,30 +89,32 @@ window.onload = function() {
 	});
     }
 
-    function determineScore(letterName){
+    function determineScore(letterName, label){
 	if(letterName == currentLetter){
 	    score += 1;
 	    presentLetterName();
 	} else{
 	    score -=1;
 	}
+	updateScore(label);
     }
 
-    function detectIfHit(avatar){
+    function detectIfHit(avatar, label){
 	for(var letter in presentedLetters){
 	    if(avatar.within(presentedLetters[letter], 35)){
-		determineScore(presentedLetters[letter].name);
+		determineScore(presentedLetters[letter].name, label);
 	    }
 	}
     }
 
-    // Add all images
-    // Add all audio
-    game.preload("img/letters/a.png", "img/letters/b.png", "img/avatar.png", "audio/a.wav");
-    game.onload = function() {
+    function updateScore(label){
+	label.text = "Score: " + score;
+    }
+
+    function presentScore(){
         var label = new enchant.Label();
 	//After calculating score, use it here
-        label.text = "Score: ";
+        label.text = "Score: " + score;
         label.width = 128;
         label.height = 64;
 	// TO DO
@@ -122,12 +123,20 @@ window.onload = function() {
         label.font = "20px 'Arial'";
         game.rootScene.addChild(label);
 
+	return label;
+    }
+
+    // Add all images
+    // Add all audio
+    game.preload("img/letters/a.png", "img/letters/b.png", "img/avatar.png", "audio/a.wav");
+    game.onload = function() {
+	var scoreLabel = presentScore();
 	var avatar = createAvatar();
 	moveAvatar(avatar);
 	presentLetterName();
 	window.setInterval(presentLetters, 2000);
 	//800ms so it doesn't detect twice the same hit for a given letter
-	window.setInterval(detectIfHit, 1000, avatar);
+	window.setInterval(detectIfHit, 1000, avatar, scoreLabel);
     };
     game.start();
 };
