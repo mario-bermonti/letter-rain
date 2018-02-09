@@ -28,9 +28,13 @@ window.onload = function() {
     function presentLetterName(){
 	// Determine the current letter to play its audio
 	currentLetter = selectRandomLetter();
-	// Doesn't work
-	//game.soundLetterA = game.assets["a.wav"];
-	//game.soundLetterA.play();
+	console.log("correct letter: ", currentLetter);
+	// To do:
+	//When all audio is included, change next line
+	var currentLetter2 = "a.wav";
+	var sound = "audio/" + currentLetter2;
+	game.sound = game.assets[sound];
+	game.sound.play();
     }
 
     function createLetters(){
