@@ -130,10 +130,19 @@ window.onload = function() {
 	return label;
     }
 
+    function presentBackground(){
+	var bg = new Sprite(width, height);
+	bg.x = 0;
+	bg.y = 0;
+	bg.image = game.assets["img/bg.png"];
+	game.rootScene.addChild(bg);
+    }
+
     // Add all images
     // Add all audio
-    game.preload("img/letters/a.png", "img/letters/b.png", "img/avatar.png", "audio/a.wav");
+    game.preload("img/letters/a.png", "img/letters/b.png", "img/avatar.png", "audio/a.wav", "img/bg.png");
     game.onload = function() {
+	presentBackground();
 	var scoreLabel = presentScore();
 	var avatar = createAvatar();
 	moveAvatar(avatar);
