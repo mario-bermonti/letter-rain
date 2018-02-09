@@ -93,7 +93,7 @@ window.onload = function() {
 	});
     }
 
-    function determineScore(letterName, label){
+    function determineScore(letter, letterName, label){
 	if(letterName == currentLetter){
 	    score += 1;
 	    presentLetterName();
@@ -106,7 +106,7 @@ window.onload = function() {
     function detectIfHit(avatar, label){
 	for(var letter in presentedLetters){
 	    if(avatar.within(presentedLetters[letter], 35)){
-		determineScore(presentedLetters[letter].name, label);
+		determineScore(presentedLetters[letter], presentedLetters[letter].name, label);
 	    }
 	}
     }
