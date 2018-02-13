@@ -120,11 +120,10 @@ window.onload = function() {
 	//After calculating score, use it here
         label.text = "Score: " + score;
         label.width = 128;
-        label.height = 64;
-	// TO DO
-	//Set the desired location
-	//Determine screen size
+        label.height = 25;
+	label.x = width - label.width + 45;
         label.font = "20px 'Arial'";
+	//label.backgroundColor = "white";
         game.rootScene.addChild(label);
 
 	return label;
