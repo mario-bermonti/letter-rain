@@ -31,7 +31,7 @@ window.onload = function() {
 	console.log("correct letter: ", currentLetter);
 	// To do:
 	//When all audio is included, change next line
-	var currentLetter2 = "a.wav";
+	var currentLetter2 = "a.m4a";
 	var sound = "audio/" + currentLetter2;
 	game.sound = game.assets[sound];
 	game.sound.play();
@@ -139,7 +139,7 @@ window.onload = function() {
 
     // Add all images
     // Add all audio
-    game.preload("img/letters/a.png", "img/letters/b.png", "img/avatar.png", "audio/a.wav", "img/bg.png");
+    game.preload("img/letters/a.png", "img/letters/b.png", "img/avatar.png", "audio/a.m4a", "img/bg.png");
     game.onload = function() {
 	presentBackground();
 	var scoreLabel = presentScore();
